@@ -1,12 +1,16 @@
 <p align="center"><img src="docs/Logo.gif" alt="Logo"/></p>
 
+> [!CAUTION]
+> This is an ***unofficial*** port of Superfighters Redux to Superfighters Deluxe `v.1.4.1b`.
+> 
+> The Superfighters Redux build used is the latest of SFR's repository, `v.1.0.5_dev`, and it is still in development. Due to both this, and the porting process you may experience crashes or unintended game behavior.
+>
+> Do ***not*** let this be your first experience of Superfighters Redux, I highly recommend playing the original build for SFD `v.1.3.7d`. You can get SFD `v.1.3.7d` through Steam betas.
+
 > [!IMPORTANT]
 > This mod is still a work-in-progress. Features may break, be added, removed, or changed entirely.
 
 [![Discord](https://img.shields.io/discord/978692248013275287?style=flat-square&logo=discord&label=Discord)](https://discord.gg/UbbCs2kywd)
-[![Activity](https://img.shields.io/github/commit-activity/w/Odex64/SFR?style=flat-square&logo=Github&label=Activity)](https://github.com/Odex64/SFR/activity)
-[![Stars](https://img.shields.io/github/stars/Odex64/SFR?style=flat-square&logo=Github&label=Stars)](https://github.com/Odex64/SFR/stargazers)
-[![Build](https://img.shields.io/github/actions/workflow/status/Odex64/SFR/build.yml?style=flat-square&logo=github&label=Build)](https://github.com/Odex64/SFR/actions/workflows/build.yml)
 
 <details>
 <summary>📖 FAQ</summary>
