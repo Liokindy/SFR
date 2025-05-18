@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
@@ -32,7 +33,7 @@ internal static class Browser
                     {
                         color = Color.White;
                     }
-                    else if (__instance.m_game.SFDGameServer.Version == "v.1.3.7d")
+                    else if (__instance.m_game.SFDGameServer.Version == Globals.VanillaVersion)
                     {
                         color = Color.Yellow;
                     }
@@ -52,7 +53,7 @@ internal static class Browser
     [HarmonyPatch(typeof(SFDGameServer), nameof(SFDGameServer.Version), MethodType.Setter)]
     private static bool GameServerVersion(ref string value)
     {
-        if (value == "v.1.3.7x")
+        if (value == Globals.VanillaVersion)
         {
             value = Globals.ServerVersion;
         }
@@ -69,10 +70,10 @@ internal static class Browser
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(NetMessage.Connection.DiscoveryResponse.Data), MethodType.Constructor, typeof(ServerResponse), typeof(string), typeof(string), typeof(string), typeof(Guid))]
+    [HarmonyPatch(typeof(NetMessage.Connection.DiscoveryResponse.Data), MethodType.Constructor, new Type[6] { typeof(ServerResponse), typeof(string), typeof(bool), typeof(string), typeof(string), typeof(Guid) })]
     private static void PatchServerVersionResponse(ref NetMessage.Connection.DiscoveryResponse.Data __instance)
     {
-        if (__instance.Version == "v.1.3.7x")
+        if (__instance.Version == Globals.VanillaVersion)
         {
             __instance.Version = Globals.ServerVersion;
         }
@@ -89,7 +90,7 @@ internal static class Browser
                 continue;
             }
 
-            if (instruction.operand.Equals("v.1.3.7x"))
+            if (instruction.operand.Equals(Globals.VanillaVersion))
             {
                 instruction.operand = Globals.ServerVersion;
             }
@@ -102,43 +103,17 @@ internal static class Browser
     [HarmonyPatch(typeof(NetMessage.Connection.DiscoveryRequest.Data), MethodType.Constructor, typeof(Guid), typeof(int), typeof(bool), typeof(string), typeof(string))]
     private static void PatchServerVersionRequest(ref NetMessage.Connection.DiscoveryRequest.Data __instance)
     {
-        if (__instance.Version == "v.1.3.7x")
+        if (__instance.Version == Globals.VanillaVersion)
         {
             __instance.Version = Globals.ServerVersion;
         }
     }
 
-    [HarmonyPrefix]
+    [HarmonyTranspiler]
     [HarmonyPatch(typeof(NetMessage.Connection.DiscoveryResponse), nameof(NetMessage.Connection.DiscoveryResponse.Read))]
-    private static bool PatchServerVersion(NetIncomingMessage netIncomingMessage, ref NetMessage.Connection.DiscoveryResponse.Data __result)
+    private static IEnumerable<CodeInstruction> PatchServerVersion(IEnumerable<CodeInstruction> instructions)
     {
-        NetMessage.Connection.DiscoveryResponse.Data result = default;
-        try
-        {
-            result.Version = netIncomingMessage.ReadString();
-            result.Response = (ServerResponse)netIncomingMessage.ReadInt32();
-
-            if (netIncomingMessage.Position < netIncomingMessage.LengthBits)
-            {
-                result.CryptPhraseA = netIncomingMessage.ReadString();
-            }
-
-            if (netIncomingMessage.Position < netIncomingMessage.LengthBits)
-            {
-                result.CryptPhraseB = netIncomingMessage.ReadString();
-            }
-
-            result.ServerPInstance = result.Version == Globals.ServerVersion ? new Guid(netIncomingMessage.ReadBytes(16)) : Guid.Empty;
-        }
-        catch (Exception)
-        {
-            result.Version = "Unknown";
-            result.Response = ServerResponse.RefuseConnectVersionDiffer;
-            result.ServerPInstance = Guid.Empty;
-        }
-
-        __result = result;
-
-        return false;
+        instructions.ElementAt(49).operand = Globals.ServerVersion;
+        return instructions;
     }
 }

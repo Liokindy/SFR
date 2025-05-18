@@ -51,10 +51,10 @@ internal sealed class ObjectHead : ObjectGiblet
 
     private static Texture2D GetTextureFromEquipment(Equipment equipment)
     {
-        var skin = equipment.m_parts[0][0]?.GetTexture(0);
+        var skin = equipment.m_parts[0][0]?.Textures[0];
         if (skin is not null)
         {
-            var task = Task.Run(() => equipment.m_parts[0][0]?.GetTexture(0, equipment.GetItemColors(0)));
+            var task = Task.Run(() => equipment.m_parts[0][0]?.GetTexture(0, equipment.GetItemColors(0), equipment.GetItemColorsKey(0)));
             if (task.Wait(5))
             {
                 skin = task.Result;
@@ -65,10 +65,10 @@ internal sealed class ObjectHead : ObjectGiblet
             }
         }
 
-        var accessory = equipment.m_parts[6][0]?.GetTexture(0);
+        var accessory = equipment.m_parts[6][0]?.Textures[0];
         if (accessory is not null)
         {
-            var task1 = Task.Run(() => equipment.m_parts[6][0]?.GetTexture(0, equipment.GetItemColors(6)));
+            var task1 = Task.Run(() => equipment.m_parts[6][0]?.GetTexture(0, equipment.GetItemColors(6), equipment.GetItemColorsKey(6)));
             if (task1.Wait(5))
             {
                 accessory = task1.Result;
@@ -79,10 +79,10 @@ internal sealed class ObjectHead : ObjectGiblet
             }
         }
 
-        var head = equipment.m_parts[8][0]?.GetTexture(0);
+        var head = equipment.m_parts[8][0]?.Textures[0];
         if (head is not null)
         {
-            var task2 = Task.Run(() => equipment.m_parts[8][0]?.GetTexture(0, equipment.GetItemColors(8)));
+            var task2 = Task.Run(() => equipment.m_parts[8][0]?.GetTexture(0, equipment.GetItemColors(8), equipment.GetItemColorsKey(8)));
             if (task2.Wait(5))
             {
                 head = task2.Result;

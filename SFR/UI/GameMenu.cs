@@ -19,7 +19,7 @@ internal static class GameMenu
                 continue;
             }
 
-            if (instruction.operand.Equals("v.1.3.7x"))
+            if (instruction.operand.Equals(Globals.VanillaVersion))
             {
                 instruction.operand = $"SFR {Globals.SFRVersion}";
                 break;

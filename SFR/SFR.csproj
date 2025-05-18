@@ -12,6 +12,21 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <LangVersion>default</LangVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SFR.Program</StartupObject>
@@ -44,14 +59,15 @@
     </Reference>
     <Reference Include="Box2D.XNA">
       <HintPath>..\SFD\Box2D.XNA.dll</HintPath>
-      <Private>false</Private>
+    </Reference>
+    <Reference Include="Core">
+      <HintPath>..\SFD\Core.dll</HintPath>
     </Reference>
     <Reference Include="DiscordRPC, Version=1.2.1.24, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscordRichPresence.1.2.1.24\lib\net45\DiscordRPC.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
       <HintPath>..\SFD\Lidgren.Network.dll</HintPath>
-      <Private>false</Private>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework">
       <HintPath>..\XNA\Microsoft.Xna.Framework.dll</HintPath>
@@ -73,15 +89,9 @@
     </Reference>
     <Reference Include="SFD.GameScriptInterface">
       <HintPath>..\SFD\SFD.GameScriptInterface.dll</HintPath>
-      <Private>false</Private>
     </Reference>
     <Reference Include="SFD.ScriptEngine">
       <HintPath>..\SFD\SFD.ScriptEngine.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Superfighters Deluxe">
-      <HintPath>..\SFD\Core.dll</HintPath>
-      <Private>false</Private>
     </Reference>
     <Reference Include="System">
       <Private>false</Private>
@@ -108,7 +118,6 @@
     <Compile Include="Debug\QuickStartup.cs" />
     <Compile Include="Fighter\AnimHandler.cs" />
     <Compile Include="Fighter\ExtendedPlayer.cs" />
-    <Compile Include="Fighter\ExtendedTeam.cs" />
     <Compile Include="Fighter\ExtendedModifiers.cs" />
     <Compile Include="Fighter\GadgetHandler.cs" />
     <Compile Include="Fighter\GoreHandler.cs" />
@@ -150,7 +159,6 @@
     <Compile Include="Objects\ObjectStickyBombThrown.cs" />
     <Compile Include="Objects\ObjectStickyProjectile.cs" />
     <Compile Include="OnlineServices\Browser.cs" />
-    <Compile Include="OnlineServices\Host.cs" />
     <Compile Include="Projectiles\Database.cs" />
     <Compile Include="Projectiles\IExtendedProjectile.cs" />
     <Compile Include="Projectiles\ProjectileBarrett.cs" />
@@ -239,6 +247,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -86,22 +86,10 @@ internal static class Program
             }
         }
 
-        bool isServer = false;
         for (int i = 0; i < args.Length; i++)
         {
-            if (args[i].Equals("-SERVER", StringComparison.OrdinalIgnoreCase))
-            {
-                isServer = true;
-            }
-            else if (isServer && args[i].Equals("-SLOTS", StringComparison.OrdinalIgnoreCase))
-            {
-                if (i + 1 < args.Length && int.TryParse(args[i + 1], out int slots))
-                {
-                    Globals.Slots = slots;
-                }
-            }
 #if DEBUG
-            else if (args[i].Equals("-DEBUG", StringComparison.OrdinalIgnoreCase))
+            if (args[i].Equals("-DEBUG", StringComparison.OrdinalIgnoreCase))
             {
                 Globals.QuickStart = true;
                 Globals.DebugMap = args[i + 1] + ".sfdm";
