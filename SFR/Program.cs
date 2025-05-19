@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using DiscordRPC;
+// using DiscordRPC;
 using HarmonyLib;
 using SFR.Helper;
 using SFR.Misc;
@@ -78,13 +78,13 @@ internal static class Program
             }
         }
 
-        if (!(args.Length > 0 && args.Contains("-SKIP", StringComparer.OrdinalIgnoreCase)) && Choice("Check for updates? (Y/n)"))
-        {
-            if (CheckUpdate())
-            {
-                return 0;
-            }
-        }
+        //if (!(args.Length > 0 && args.Contains("-SKIP", StringComparer.OrdinalIgnoreCase)) && Choice("Check for updates? (Y/n)"))
+        //{
+        //    if (CheckUpdate())
+        //    {
+        //        return 0;
+        //    }
+        //}
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -100,7 +100,7 @@ internal static class Program
         Logger.LogWarn("Patching");
         _harmony.PatchAll();
 
-        SetRichPresence();
+        // SetRichPresence();
 
         Logger.LogError("Starting SFR");
         SFD.Program.Main(args);
@@ -108,31 +108,31 @@ internal static class Program
         return 0;
     }
 
-    private static void SetRichPresence()
-    {
-        var client = new DiscordRpcClient("1249116075912728669");
+    //private static void SetRichPresence()
+    //{
+    //    var client = new DiscordRpcClient("1249116075912728669");
 
-        _ = client.Initialize();
+    //    _ = client.Initialize();
 
-        client.SetPresence(new RichPresence()
-        {
-            Details = "Rocket Riding",
-            Timestamps = Timestamps.Now,
-            Assets = new Assets()
-            {
-                LargeImageKey = "icon",
-                LargeImageText = "Superfighters Redux",
-            },
-            Buttons =
-            [
-                new Button()
-                {
-                    Label = "Discord",
-                    Url = "https://discord.gg/UbbCs2kywd"
-                }
-            ]
-        });
-    }
+    //    client.SetPresence(new RichPresence()
+    //    {
+    //        Details = "Rocket Riding",
+    //        Timestamps = Timestamps.Now,
+    //        Assets = new Assets()
+    //        {
+    //            LargeImageKey = "icon",
+    //            LargeImageText = "Superfighters Redux",
+    //        },
+    //        Buttons =
+    //        [
+    //            new Button()
+    //            {
+    //                Label = "Discord",
+    //                Url = "https://discord.gg/UbbCs2kywd"
+    //            }
+    //        ]
+    //    });
+    //}
 
     private static bool CheckUpdate()
     {
